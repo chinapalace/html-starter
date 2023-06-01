@@ -1,96 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta
-      name="description"
-      content="High-performance HTML based website template."
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
+    <title>Tapcart Custom Block</title>
+    <script type="text/javascript">
+      window.addEventListener("webbridge-load", () => {
+        console.log("codeblocksloaded", window.Tapcart);
+      });
+    </script>
+    <script src="https://storage.googleapis.com/cdn.tapcart.com/webbridge-sdk/webbridge.es.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+
+    <style>
+      body {
+        background: #cf6076;
+      }
+    </style>
+    <style id="tapcart-merchant-css">
+      #root {
+        overflow: hidden;
+      }
+    </style>
+
+    <script id="tapcart-merchant-html" type="text/javascript">
+      Handlebars.partials["tapcart-root"] = Handlebars.template({
+        compiler: [8, ">= 4.3.0"],
+        main: function (container, depth0, helpers, partials, data) {
+          var stack1,
+            lookupProperty =
+              container.lookupProperty ||
+              function (parent, propertyName) {
+                if (
+                  Object.prototype.hasOwnProperty.call(parent, propertyName)
+                ) {
+                  return parent[propertyName];
+                }
+                return undefined;
+              };
+          return "<h1>Hello World </h1>";
+        },
+        useData: true,
+      });
+    </script>
+
+    <script id="tapcart-merchant-js" type="text/tapcartscript">
+      Handlebars.registerHelper('json', function(context) {
+          return JSON.stringify(context,null,2);
+      });
+
+      let extraDiv = document.querySelector("#extra");
+      let source = document.querySelector("#extra-template").innerHTML;
+      let extraTemplate = Handlebars.compile(source);
+      extraDiv.innerHTML = extraTemplate(Tapcart.variables)
+    </script>
+    
+    <script type="text/javascript">
+      setTimeout(() => {
+        Tapcart.mobile.load({
+          platform: "editor",
+          messageHandlerName: "Tapcart",
+          variables: {
+            customer: { id: "779544431", firstName: "John" },
+            device: {
+              id: "25679b7e-2348-44da-94ef-e218f6be4586",
+              locale: "en",
+            },
+            product: {
+              id: "6875079049404",
+              description: "<p>Vintage cotton Tapcart shirt</p> ",
+              options: [{ name: "Color", values: ["Black", "Blue"] }],
+              handle: "vintage - shirt",
+              tags: ["Vintage", "Cotton", "New"],
+              availableForSale: true,
+              title: "Vintage Tapcart Shirt",
+              price: 55,
+              metafields: {
+                myNamespace1: { myKey1: "myValue1" },
+                myNamespace2: { myKey2: "myValue2" },
+              },
+              compareAtPrice: 100,
+              vendor: "Tapcart",
+              images: [
+                "https://assets-global.website-files.com/616f0a7a027baaf59a43390b/616f0a7a027baab7e743396e_full.svg",
+              ],
+              selectedVariant: { id: "6875079049404" },
+              variants: [
+                {
+                  selectedOptions: [{ name: "Color", value: "Black" }],
+                  id: "40122114900156",
+                  price: 55,
+                  title: "Vintage Tapcart Shirt",
+                  isAvailable: true,
+                  compareAtPrice: 100,
+                  image:
+                    "https://assets-global.website-files.com/616f0a7a027baaf59a43390b/616f0a7a027baab7e743396e_full.svg",
+                  sku: "12938412",
+                },
+              ],
+            },
+          },
+        });
+
+        Tapcart.actions.removeDiscounts();
+      }, 2000);
+    </script>
   </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
-      >
-      region.
-    </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
+
+  <body id="body">
+    <div id="tapcart-root"></div>
+
+    <div>
+      <div>
+        <div id="extra">Loading vars...</div>
+        <script id="extra-template" type="text/x-handlebars-template">
+          <div>These are the variables</div>
+          <pre style="white-space:pre-wrap;word-break:break-all;">{{json
+              this
+            }}</pre>
+        </script>
+      </div>
+    </div>
   </body>
 </html>
