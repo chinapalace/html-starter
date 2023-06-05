@@ -10,119 +10,105 @@
     <script type="text/javascript">
       window.addEventListener("webbridge-load", () => {
         console.log("codeblocksloaded", window.Tapcart);
+        // Tapcart.mobile.load({
+        //   platform: "editor",
+        //   messageHandlerName: "Tapcart",
+        //   variables: {
+        //     customer: { id: "779544431", firstName: "John" },
+        //     device: {
+        //       id: "25679b7e-2348-44da-94ef-e218f6be4586",
+        //       locale: "en",
+        //     },
+        //     product: {
+        //       id: "6875079049404",
+        //       description: "<p>Vintage cotton Tapcart shirt</p> ",
+        //       options: [{ name: "Color", values: ["Black", "Blue"] }],
+        //       handle: "vintage - shirt",
+        //       tags: ["Vintage", "Cotton", "New"],
+        //       availableForSale: true,
+        //       title: "Vintage Tapcart Shirt",
+        //       price: 55,
+        //       metafields: {
+        //         myNamespace1: { myKey1: "myValue1" },
+        //         myNamespace2: { myKey2: "myValue2" },
+        //       },
+        //       compareAtPrice: 100,
+        //       vendor: "Tapcart",
+        //       images: [
+        //         "https://assets-global.website-files.com/616f0a7a027baaf59a43390b/616f0a7a027baab7e743396e_full.svg",
+        //       ],
+        //       selectedVariant: { id: "6875079049404" },
+        //       variants: [
+        //         {
+        //           selectedOptions: [{ name: "Color", value: "Black" }],
+        //           id: "40122114900156",
+        //           price: 55,
+        //           title: "Vintage Tapcart Shirt",
+        //           isAvailable: true,
+        //           compareAtPrice: 100,
+        //           image:
+        //             "https://assets-global.website-files.com/616f0a7a027baaf59a43390b/616f0a7a027baab7e743396e_full.svg",
+        //           sku: "12938412",
+        //         },
+        //       ],
+        //     },
+        //   },
+        // });
       });
     </script>
     <script src="https://storage.googleapis.com/cdn.tapcart.com/webbridge-sdk/webbridge.es.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 
-    <style>
-      body {
-        background: #cf6076;
-      }
-    </style>
-    <style id="tapcart-merchant-css">
-      #root {
-        overflow: hidden;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
 
-    <script id="tapcart-merchant-html" type="text/javascript">
-      Handlebars.partials["tapcart-root"] = Handlebars.template({
-        compiler: [8, ">= 4.3.0"],
-        main: function (container, depth0, helpers, partials, data) {
-          var stack1,
-            lookupProperty =
-              container.lookupProperty ||
-              function (parent, propertyName) {
-                if (
-                  Object.prototype.hasOwnProperty.call(parent, propertyName)
-                ) {
-                  return parent[propertyName];
-                }
-                return undefined;
-              };
-          return "<h1>Hello World </h1>";
-        },
-        useData: true,
-      });
-    </script>
-
-    <script id="tapcart-merchant-js" type="text/tapcartscript">
-      Handlebars.registerHelper('json', function(context) {
-          return JSON.stringify(context,null,2);
-      });
-
-      let extraDiv = document.querySelector("#extra");
-      let source = document.querySelector("#extra-template").innerHTML;
-      let extraTemplate = Handlebars.compile(source);
-      extraDiv.innerHTML = extraTemplate(Tapcart.variables)
-    </script>
-    
-    <script type="text/javascript">
-      setTimeout(() => {
-        Tapcart.mobile.load({
-          platform: "editor",
-          messageHandlerName: "Tapcart",
-          variables: {
-            customer: { id: "779544431", firstName: "John" },
-            device: {
-              id: "25679b7e-2348-44da-94ef-e218f6be4586",
-              locale: "en",
-            },
-            product: {
-              id: "6875079049404",
-              description: "<p>Vintage cotton Tapcart shirt</p> ",
-              options: [{ name: "Color", values: ["Black", "Blue"] }],
-              handle: "vintage - shirt",
-              tags: ["Vintage", "Cotton", "New"],
-              availableForSale: true,
-              title: "Vintage Tapcart Shirt",
-              price: 55,
-              metafields: {
-                myNamespace1: { myKey1: "myValue1" },
-                myNamespace2: { myKey2: "myValue2" },
-              },
-              compareAtPrice: 100,
-              vendor: "Tapcart",
-              images: [
-                "https://assets-global.website-files.com/616f0a7a027baaf59a43390b/616f0a7a027baab7e743396e_full.svg",
-              ],
-              selectedVariant: { id: "6875079049404" },
-              variants: [
-                {
-                  selectedOptions: [{ name: "Color", value: "Black" }],
-                  id: "40122114900156",
-                  price: 55,
-                  title: "Vintage Tapcart Shirt",
-                  isAvailable: true,
-                  compareAtPrice: 100,
-                  image:
-                    "https://assets-global.website-files.com/616f0a7a027baaf59a43390b/616f0a7a027baab7e743396e_full.svg",
-                  sku: "12938412",
-                },
-              ],
-            },
-          },
-        });
-
-        Tapcart.actions.removeDiscounts();
-      }, 2000);
-    </script>
+    <script type="text/javascript"></script>
   </head>
 
-  <body id="body">
-    <div id="tapcart-root"></div>
+  <body>
+    <div class="container">
+      <h2>Variables</h2>
+      <div class="variable">
+        <pre id="variablesPre">
+                <!-- Variables go here -->
+            </pre>
+      </div>
 
-    <div>
-      <div>
-        <div id="extra">Loading vars...</div>
-        <script id="extra-template" type="text/x-handlebars-template">
-          <div>These are the variables</div>
-          <pre style="white-space:pre-wrap;word-break:break-all;">{{json
-              this
-            }}</pre>
-        </script>
+      <h2>Actions</h2>
+      <div class="action">
+        <button onClick="window.Tapcart.actions.addToCart()">
+          Add To Cart
+        </button>
+        <button onClick="window.Tapcart.actions.applyDiscount()">
+          Apply Discount
+        </button>
+        <button onClick="window.Tapcart.actions.applyGiftCard()">
+          Apply Gift Card
+        </button>
+        <button onClick="window.Tapcart.actions.getAuthenticatedCustomer()">
+          Get Authenticated Customer
+        </button>
+        <button onClick="window.Tapcart.actions.openCart()">Open Cart</button>
+        <button onClick="window.Tapcart.actions.openCollection()">
+          Open Collection
+        </button>
+        <button onClick="window.Tapcart.actions.openProduct()">
+          Open Product
+        </button>
+        <button onClick="window.Tapcart.actions.removeDiscounts()">
+          Remove Discounts
+        </button>
+        <button onClick="window.Tapcart.actions.showToast()">Show Toast</button>
       </div>
     </div>
+    <script>
+      if (window.Tapcart) {
+        document.getElementById("variablesPre").textContent = JSON.stringify(
+          window.Tapcart.variables,
+          null,
+          2
+        );
+      } else {
+        console.error("Tapcart SDK not loaded.");
+      }
+    </script>
   </body>
 </html>
