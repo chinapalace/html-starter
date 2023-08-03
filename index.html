@@ -7,108 +7,284 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <title>Tapcart Custom Block</title>
-    <script type="text/javascript">
-      window.addEventListener("webbridge-load", () => {
-        console.log("codeblocksloaded", window.Tapcart);
-        // Tapcart.mobile.load({
-        //   platform: "editor",
-        //   messageHandlerName: "Tapcart",
-        //   variables: {
-        //     customer: { id: "779544431", firstName: "John" },
-        //     device: {
-        //       id: "25679b7e-2348-44da-94ef-e218f6be4586",
-        //       locale: "en",
-        //     },
-        //     product: {
-        //       id: "6875079049404",
-        //       description: "<p>Vintage cotton Tapcart shirt</p> ",
-        //       options: [{ name: "Color", values: ["Black", "Blue"] }],
-        //       handle: "vintage - shirt",
-        //       tags: ["Vintage", "Cotton", "New"],
-        //       availableForSale: true,
-        //       title: "Vintage Tapcart Shirt",
-        //       price: 55,
-        //       metafields: {
-        //         myNamespace1: { myKey1: "myValue1" },
-        //         myNamespace2: { myKey2: "myValue2" },
-        //       },
-        //       compareAtPrice: 100,
-        //       vendor: "Tapcart",
-        //       images: [
-        //         "https://assets-global.website-files.com/616f0a7a027baaf59a43390b/616f0a7a027baab7e743396e_full.svg",
-        //       ],
-        //       selectedVariant: { id: "6875079049404" },
-        //       variants: [
-        //         {
-        //           selectedOptions: [{ name: "Color", value: "Black" }],
-        //           id: "40122114900156",
-        //           price: 55,
-        //           title: "Vintage Tapcart Shirt",
-        //           isAvailable: true,
-        //           compareAtPrice: 100,
-        //           image:
-        //             "https://assets-global.website-files.com/616f0a7a027baaf59a43390b/616f0a7a027baab7e743396e_full.svg",
-        //           sku: "12938412",
-        //         },
-        //       ],
-        //     },
-        //   },
-        // });
-      });
+
+        <script type="text/javascript">
+
+        window.addEventListener("webbridge-loaded", () => {
+            console.log("codeblocksloaded", window.Tapcart)
+        })
+
     </script>
-    <script src="https://storage.googleapis.com/cdn.tapcart.com/webbridge-sdk/webbridge.es.js"></script>
+
+
+
+
+
+
+    <script src="https://storage.googleapis.com/cdn.tapcart.com/webbridge-sdk/webbridge.umd.js" ></script>
 
     <link rel="stylesheet" type="text/css" href="styles.css" />
 
-    <script type="text/javascript"></script>
   </head>
 
   <body>
     <div class="container">
+      <!-- Variables display -->
       <h2>Variables</h2>
       <div class="variable">
         <pre id="variablesPre">
-                <!-- Variables go here -->
-            </pre>
+          <!-- Variables go here -->
+        </pre>
       </div>
-
-      <h2>Actions</h2>
+  
+      <!-- Discount Inputs & Actions -->
+      <h2>Discount Inputs & Actions</h2>
       <div class="action">
-        <button onClick="window.Tapcart.actions.addToCart()">
-          Add To Cart
-        </button>
-        <button onClick="window.Tapcart.actions.applyDiscount()">
-          Apply Discount
-        </button>
-        <button onClick="window.Tapcart.actions.applyGiftCard()">
-          Apply Gift Card
-        </button>
-        <button onClick="window.Tapcart.actions.getAuthenticatedCustomer()">
-          Get Authenticated Customer
-        </button>
-        <button onClick="window.Tapcart.actions.openCart()">Open Cart</button>
-        <button onClick="window.Tapcart.actions.openCollection()">
-          Open Collection
-        </button>
-        <button onClick="window.Tapcart.actions.openProduct()">
-          Open Product
-        </button>
-        <button onClick="window.Tapcart.actions.removeDiscounts()">
-          Remove Discounts
-        </button>
-        <button onClick="window.Tapcart.actions.showToast()">Show Toast</button>
+        <div>
+          <label for="discountCode">Discount Code</label>
+          <input
+            type="text"
+            id="discountCode"
+            placeholder="Enter discount code"
+          />
+        </div>
+        <button onClick="applyDiscount()">Apply Discount</button>
+        <button onClick="removeDiscounts()">Remove Discounts</button>
+      </div>
+  
+      <!-- Gift Card Inputs & Actions -->
+      <h2>Gift Card Inputs & Actions</h2>
+      <div class="action">
+        <div>
+          <label for="giftCardCode">Gift Card Code</label>
+          <input
+            type="text"
+            id="giftCardCode"
+            placeholder="Enter gift card code"
+          />
+        </div>
+        <button onClick="applyGiftCard()">Apply Gift Card</button>
+      </div>
+  
+      <!-- Toast Inputs & Actions -->
+      <h2>Toast Inputs & Actions</h2>
+      <div class="action">
+        <div>
+          <label for="toastMessage">Toast Message</label>
+          <input
+            type="text"
+            id="toastMessage"
+            placeholder="Enter toast message"
+          />
+        </div>
+        <div>
+          <label for="toastType">Toast Type</label>
+          <select id="toastType">
+            <option value="success">Success</option>
+            <option value="error">Error</option>
+          </select>
+        </div>
+        <button onClick="showToast()">Show Toast</button>
+      </div>
+  
+      <!-- Product Inputs & Actions -->
+      <h2>Product Inputs & Actions</h2>
+      <div class="action">
+        <div>
+          <label for="productId">Product ID</label>
+          <input type="text" id="productId" placeholder="Enter product ID" />
+        </div>
+        <div>
+          <label for="variantId">Variant ID</label>
+          <input
+            type="text"
+            id="variantId"
+            placeholder="Enter variant ID (optional)"
+          />
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            id="isRelatedProduct"
+            value="true"
+          />
+          <label for="isRelatedProduct">Is Related Product</label>
+        </div>
+        <button onClick="openProduct()">Open Product</button>
+      </div>
+  
+      <!-- Collection Inputs & Actions -->
+      <h2>Collection Inputs & Actions</h2>
+      <div class="action">
+        <div>
+          <label for="collectionId">Collection ID</label>
+          <input
+            type="text"
+            id="collectionId"
+            placeholder="Enter collection ID"
+          />
+        </div>
+        <button onClick="openCollection()">Open Collection</button>
+      </div>
+  
+      <!-- Cart Inputs & Actions -->
+      <h2>Cart Inputs & Actions</h2>
+      <div class="action">
+        <div>
+          <label for="quantity">Quantity</label>
+          <input type="number" id="quantity" placeholder="Enter quantity" />
+        </div>
+        <div>
+          <label for="cartVariantId">Variant ID</label>
+          <input
+            type="text"
+            id="cartVariantId"
+            placeholder="Enter variant ID (required)"
+          />
+        </div>
+        <button onClick="addToCart()">Add To Cart</button>
+        <button onClick="openCart()">Open Cart</button>
+      </div>
+  
+      <!-- Other Actions -->
+      <h2>Other Actions</h2>
+      <div class="action">
+        <button onClick="getCustomerIdentity()">Get Customer Identity</button>
+        <div>
+          <label>Customer Identity</label>
+          <pre id="customerIdentityPre"></pre>
+        </div>
       </div>
     </div>
+  
     <script>
+      function displayVariables() {
+        const variablesPre = document.getElementById("variablesPre");
+        if (window.Tapcart && variablesPre) {
+          variablesPre.textContent = JSON.stringify(
+            window.Tapcart.variables,
+            null,
+            2
+          );
+        }
+      }
+  
+      function applyDiscount() {
+        const discountCode = document.getElementById("discountCode").value;
+        if (discountCode) {
+          window.Tapcart.actions.applyDiscount({ discountCode });
+        }
+      }
+  
+      function removeDiscounts() {
+        const discountCode = document.getElementById("discountCode").value;
+        if (discountCode) {
+          window.Tapcart.actions.removeDiscounts({ discountCode });
+        }
+      }
+  
+      function applyGiftCard() {
+        const giftCardCode = document.getElementById("giftCardCode").value;
+        if (giftCardCode) {
+          window.Tapcart.actions.applyGiftCard({ giftCardCode });
+        }
+      }
+  
+      function showToast() {
+        const toastMessage = document.getElementById("toastMessage").value;
+        const toastType = document.getElementById("toastType").value;
+        if (toastMessage && toastType) {
+          window.Tapcart.actions.showToast({ message: toastMessage, type: toastType });
+        }
+      }
+  
+      function openProduct() {
+        const productId = document.getElementById("productId").value;
+        const variantId = document.getElementById("variantId").value;
+        const isRelatedProduct = document.getElementById("isRelatedProduct").checked;
+        if (productId) {
+          window.Tapcart.actions.openProduct({ productId, variantId, isRelatedProduct });
+        }
+      }
+  
+      function openCollection() {
+        const collectionId = document.getElementById("collectionId").value;
+        if (collectionId) {
+          window.Tapcart.actions.openCollection({ collectionId });
+        }
+      }
+  
+      function addToCart() {
+        const quantity = document.getElementById("quantity").value;
+        const cartVariantId = document.getElementById("cartVariantId").value;
+        if (quantity && cartVariantId) {
+          const val = {
+            cartAttributes: [{ key: "test", value: "test" }],
+            lineItems: [{ variantId: cartVariantId, quantity }]
+          };
+          window.Tapcart.actions.addToCart(val);
+        }
+      }
+  
+      function openCart() {
+        window.Tapcart.actions.openCart();
+      }
+  
+      function getCustomerIdentity() {
+        window.Tapcart.actions.getCustomerIdentity(null, {
+          onSuccess: (res) => {
+            console.log("getCustomerIdentity success", res)
+            document.getElementById("customerIdentityPre").textContent = JSON.stringify(res, null, 2);
+          },
+        });
+      }
+      </script>
+    <script>
+      function displayTapcartVariables() {
+        if (window.Tapcart && document.getElementById("variablesPre")) {
+          document.getElementById("variablesPre").textContent = JSON.stringify(
+            window.Tapcart.variables,
+            null,
+            2
+          );
+        }
+      }
+  
+      window.addEventListener("webbridge-loaded", function () {
+        console.log("webbridge loaded");
+        displayTapcartVariables();
+      });
+  
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("DOMContentLoaded");
+        displayTapcartVariables();
+      });
+  
       if (window.Tapcart) {
-        document.getElementById("variablesPre").textContent = JSON.stringify(
-          window.Tapcart.variables,
-          null,
-          2
-        );
+        console.log('creating proxy')
+        // Create a Proxy for window.Tapcart.variables
+        const proxyVariables = new Proxy(window.Tapcart.variables, {
+          set: function (target, property, value) {
+            // When any property in window.Tapcart.variables is changed, this function will be called
+            // Update the #variablesPre element with the updated variables
+            console.log("Variables updated:", window.Tapcart.variables);
+            document.getElementById("variablesPre").textContent = JSON.stringify(
+              window.Tapcart.variables,
+              null,
+              2
+            );
+  
+            // Return true to indicate that the assignment was successful
+            return true;
+          },
+        });
+   
+        // Replace window.Tapcart.variables with the Proxy object
+        window.Tapcart.variables = proxyVariables;
       } else {
         console.error("Tapcart SDK not loaded.");
       }
     </script>
+
   </body>
 </html>

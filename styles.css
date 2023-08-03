@@ -1,43 +1,110 @@
+/* styles.css */
+
 body {
-    background-color: #242424;
-    color: #f1f1f1;
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    color: #3d3d3d;
+    margin: 0;
+    padding: 0;
 }
+
 .container {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
 }
+
 h2 {
-    color: #fff;
-    padding: 10px 0;
+    background-color: transparent;
+    color: #333;
+    padding: 20px 0;
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
 }
-.variable, .action {
-    background-color: #333;
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 10px;
-}
+
+.variable,
 .action {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    background-color: #f5f5f5;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #666;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    transition: all 0.3s ease; /* Smooth transition for input fields */
+}
+
+input:focus,
+select:focus {
+    border-color: #007bff; /* Highlight border color when focused */
+}
+
 button {
+    background-color: #007bff;
     color: #fff;
-    background: linear-gradient(to right, #00b4db, #0083b0);
+    padding: 15px 30px;
     border: none;
-    padding: 10px 20px;
-    margin: 10px;
     border-radius: 5px;
     cursor: pointer;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-    transition: all 0.3s;
-    flex: 1 1 auto;
-    width: 150px; /* You can adjust this to suit your needs */
-    text-align: center;
+    font-size: 16px;
+    transition: all 0.3s ease; /* Smooth transition for buttons */
+    width: 100%; /* Set button width to fill its container */
+    display: block; /* Block-level elements take up the full width of their container */
+    margin-bottom: 10px; /* Add margin at the bottom of each button to separate them */
 }
+
+button:last-child {
+    margin-bottom: 0; /* Remove the margin-bottom for the last button */
+}
+
 button:hover {
-    transform: scale(1.05);
+    background-color: #0056b3;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* Add shadow effect on hover */
+}
+
+pre {
+    width: 100%; 
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word; 
+    background-color: #f8f8f8; 
+    border-radius: 5px; 
+}
+
+
+@media screen and (max-width: 900px) {
+    .container {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    input,
+    select,
+    button {
+        font-size: 18px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 26px;
+        padding: 20px 0;
+    }
 }
