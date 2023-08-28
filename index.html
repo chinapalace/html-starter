@@ -236,7 +236,7 @@
       }
 
       function addToCart() {
-        const quantity = document.getElementById("quantity").value;
+        const quantity = Number(document.getElementById("quantity").value);
         const cartVariantId = document.getElementById("cartVariantId").value;
         if (quantity && cartVariantId) {
           const val = {
