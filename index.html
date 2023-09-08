@@ -11,6 +11,8 @@
     <script type="text/javascript">
       window.addEventListener("webbridge-loaded", () => {
         console.log("codeblocksloaded", window.Tapcart);
+        document.getElementById("is-initialized").textContent =
+          "Tapcart SDK Initialized ✅";
       });
     </script>
 
@@ -28,6 +30,7 @@
 
   <body>
     <div class="container">
+      <div id="is-initialized">Tapcart SDK NOT Initialized 🚫</div>
       <!-- Variables display -->
       <h2>Variables</h2>
       <div class="variable">
