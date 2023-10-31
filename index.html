@@ -112,8 +112,12 @@
         <input type="text" id="cartVariantId" placeholder="Enter variant ID (required)" />
       </div>
       <div>
-        <label for="sellingPlanId">Selling Plan ID</label>
+        <label  for="sellingPlanId">Selling Plan ID</label>
         <input type="text" id="sellingPlanId" placeholder="Enter Selling Plan ID" />
+      </div>
+      <div style="display: flex; justify-content: flex-start;">
+        <input style="width:auto" type="checkbox" id="cartAttributes"  />
+        <label for="cartAttributes">Include Cart Attributes</label>
       </div>
       <button onClick="addToCart()">Add To Cart</button>
       <button onClick="removeFromCart()">Remove From Cart</button>
@@ -225,114 +229,125 @@
       const quantity = Number(document.getElementById("quantity").value);
       const cartVariantId = document.getElementById("cartVariantId").value;
       const sellingPlanId = document.getElementById("sellingPlanId").value || null;
+      const withCartAttributes = document.getElementById("cartAttributes").checked;
 
       if (quantity && cartVariantId) {
         const val = {
-          cartAttributes: [{ key: "test", value: "test" }],
+
           lineItems: [{ variantId: cartVariantId, quantity, sellingPlanId }],
         };
+        if (withCartAttributes) {
+          val.cartAttributes = [{ key: "test", value: "test" }]
+        }
         window.Tapcart.actions.addToCart(val);
       }
 
-      console.log(window.Tapcart.variables)
     }
+
 
     function removeFromCart() {
       const quantity = Number(document.getElementById("quantity").value);
       const cartVariantId = document.getElementById("cartVariantId").value;
       const sellingPlanId = document.getElementById("sellingPlanId").value || null;
+      const withCartAttributes = document.getElementById("cartAttributes").checked;
 
+      console.log(withCartAttributes)
       if (quantity && cartVariantId) {
-        const lineItems = [{ variantId: cartVariantId, quantity, sellingPlanId }]
+        const val = {
+          lineItems: [{ variantId: cartVariantId, quantity, sellingPlanId }],
+        }
+        if (withCartAttributes) {
+          val.cartAttributes = [{ key: "test", value: "test" }]
+        }
 
-        window.Tapcart.actions.removeFromCart({ lineItems });
+          window.Tapcart.actions.removeFromCart(val);
+        }
       }
-    }
 
-    function openCart() {
-      window.Tapcart.actions.openCart();
-    }
-
-    function getCustomerIdentity() {
-      window.Tapcart.actions.getCustomerIdentity(null, {
-        onSuccess: (res) => {
-          console.log("getCustomerIdentity success", res);
-          document.getElementById("customerIdentityPre").textContent =
-            JSON.stringify(res, null, 2);
-        },
-      });
-    }
-
-    function openScreen() {
-      const destinationType =
-        document.getElementById("destinationType").value;
-      const destinationURL = document.getElementById("destinationURL").value;
-      console.log("openScreen", destinationType, destinationURL)
-      window.Tapcart.actions.openScreen({
-        destination: { type: destinationType, url: destinationURL },
-      });
-    }
-
-    function scrollToBlockTop() {
-      window.Tapcart.actions.scrollToBlockTop();
-    }
-
-    function scrollToBlockBottom() {
-      window.Tapcart.actions.scrollToBlockBottom();
-    }
-  </script>
-  <script>
-    function displayTapcartVariables() {
-      if (window.Tapcart && document.getElementById("variablesPre")) {
-        document.getElementById("variablesPre").textContent = JSON.stringify(
-          window.Tapcart.variables,
-          null,
-          2
-        );
+      function openCart() {
+        window.Tapcart.actions.openCart();
       }
-    }
 
-    window.addEventListener("webbridge-loaded", function () {
-      console.log("webbridge loaded");
-      displayTapcartVariables();
-
-      if (window.Tapcart) {
-        console.log("creating proxy");
-        // Create a Proxy for window.Tapcart.variables
-        const proxyVariables = new Proxy(window.Tapcart.variables, {
-          set: function (target, property, value) {
-            // When any property in window.Tapcart.variables is changed, this function will be called
-            // Update the #variablesPre element with the updated variables
-            console.log("Variables updated:", window.Tapcart.variables);
-            document.getElementById("variablesPre").textContent =
-              JSON.stringify(window.Tapcart.variables, null, 2);
-
-            // Return true to indicate that the assignment was successful
-            return true;
+      function getCustomerIdentity() {
+        window.Tapcart.actions.getCustomerIdentity(null, {
+          onSuccess: (res) => {
+            console.log("getCustomerIdentity success", res);
+            document.getElementById("customerIdentityPre").textContent =
+              JSON.stringify(res, null, 2);
           },
         });
-
-        // Replace window.Tapcart.variables with the Proxy object
-        window.Tapcart.variables = proxyVariables;
-
-        window.Tapcart.registerEventHandler("cart/updated", function (eventData) {
-          window.Tapcart.actions.showToast({
-            type: "success",
-            message: "Event occurred: \"cart/updated\""
-          })
-          console.log("Event happend: ", eventData)
-        })
-
-
-      } else {
-        console.error("Tapcart SDK not loaded.");
       }
-    });
 
-    document.addEventListener("DOMContentLoaded", function () {
-      console.log("DOMContentLoaded");
-      displayTapcartVariables();
-    });
+      function openScreen() {
+        const destinationType =
+          document.getElementById("destinationType").value;
+        const destinationURL = document.getElementById("destinationURL").value;
+        console.log("openScreen", destinationType, destinationURL)
+        window.Tapcart.actions.openScreen({
+          destination: { type: destinationType, url: destinationURL },
+        });
+      }
+
+      function scrollToBlockTop() {
+        window.Tapcart.actions.scrollToBlockTop();
+      }
+
+      function scrollToBlockBottom() {
+        window.Tapcart.actions.scrollToBlockBottom();
+      }
+  </script>
+  <script>
+      function displayTapcartVariables() {
+        if (window.Tapcart && document.getElementById("variablesPre")) {
+          document.getElementById("variablesPre").textContent = JSON.stringify(
+            window.Tapcart.variables,
+            null,
+            2
+          );
+        }
+      }
+
+      window.addEventListener("webbridge-loaded", function () {
+        console.log("webbridge loaded");
+        displayTapcartVariables();
+
+        if (window.Tapcart) {
+          console.log("creating proxy");
+          // Create a Proxy for window.Tapcart.variables
+          const proxyVariables = new Proxy(window.Tapcart.variables, {
+            set: function (target, property, value) {
+              // When any property in window.Tapcart.variables is changed, this function will be called
+              // Update the #variablesPre element with the updated variables
+              console.log("Variables updated:", window.Tapcart.variables);
+              document.getElementById("variablesPre").textContent =
+                JSON.stringify(window.Tapcart.variables, null, 2);
+
+              // Return true to indicate that the assignment was successful
+              return true;
+            },
+          });
+
+          // Replace window.Tapcart.variables with the Proxy object
+          window.Tapcart.variables = proxyVariables;
+
+          window.Tapcart.registerEventHandler("cart/updated", function (eventData) {
+            window.Tapcart.actions.showToast({
+              type: "success",
+              message: "Event occurred: \"cart/updated\""
+            })
+            console.log("Event happend: ", eventData)
+          })
+
+
+        } else {
+          console.error("Tapcart SDK not loaded.");
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("DOMContentLoaded");
+        displayTapcartVariables();
+      });
 
 
   </script>
