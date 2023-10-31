@@ -224,10 +224,12 @@
     function addToCart() {
       const quantity = Number(document.getElementById("quantity").value);
       const cartVariantId = document.getElementById("cartVariantId").value;
+      const sellingPlanId = document.getElementById("sellingPlanId").value || null;
+
       if (quantity && cartVariantId) {
         const val = {
           cartAttributes: [{ key: "test", value: "test" }],
-          lineItems: [{ variantId: cartVariantId, quantity }],
+          lineItems: [{ variantId: cartVariantId, quantity, sellingPlanId }],
         };
         window.Tapcart.actions.addToCart(val);
       }
