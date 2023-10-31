@@ -42,3 +42,42 @@ Tapcart.mobile.load({
     },
   },
 });
+
+Tapcart.mobile.load({
+  platform: "editor",
+  messageHandlerName: "Tapcart",
+  variables: {
+    customer: {
+      metafields: [
+        {
+          key: "customer-key",
+          value: "test",
+          namespace: "namespace",
+        },
+      ],
+    },
+    product: {
+      metafields: [
+        {
+          key: "product-key",
+          value: "test",
+          namespace: "productNamespace",
+        },
+      ],
+      sourceCollection: {
+        metafields: [
+          {
+            value: "test",
+            namespace: "coll",
+            key: "coll-key",
+          },
+          {
+            value: "934000",
+            namespace: "custom",
+            key: "eventid",
+          },
+        ],
+      },
+    },
+  },
+});
