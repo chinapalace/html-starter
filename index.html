@@ -111,7 +111,7 @@
         <label for="cartVariantId">Variant ID</label>
         <input type="text" id="cartVariantId" placeholder="Enter variant ID (required)" />
       </div>
-       <div>
+      <div>
         <label for="sellingPlanId">Selling Plan ID</label>
         <input type="text" id="sellingPlanId" placeholder="Enter Selling Plan ID" />
       </div>
@@ -147,7 +147,7 @@
     <h2>Scroll Actions</h2>
     <div class="action">
       <button onClick="scrollToBlockTop()">Scroll To Block Top</button>
-       <button onClick="scrollToBlockBottom()">Scroll To Block Bottom</button>
+      <button onClick="scrollToBlockBottom()">Scroll To Block Bottom</button>
     </div>
   </div>
 
@@ -244,8 +244,8 @@
 
       if (quantity && cartVariantId) {
         const lineItems = [{ variantId: cartVariantId, quantity, sellingPlanId }]
-      
-        window.Tapcart.actions.removeFromCart({lineItems});
+
+        window.Tapcart.actions.removeFromCart({ lineItems });
       }
     }
 
@@ -297,26 +297,36 @@
       displayTapcartVariables();
 
       if (window.Tapcart) {
-      console.log("creating proxy");
-      // Create a Proxy for window.Tapcart.variables
-      const proxyVariables = new Proxy(window.Tapcart.variables, {
-        set: function (target, property, value) {
-          // When any property in window.Tapcart.variables is changed, this function will be called
-          // Update the #variablesPre element with the updated variables
-          console.log("Variables updated:", window.Tapcart.variables);
-          document.getElementById("variablesPre").textContent =
-            JSON.stringify(window.Tapcart.variables, null, 2);
+        console.log("creating proxy");
+        // Create a Proxy for window.Tapcart.variables
+        const proxyVariables = new Proxy(window.Tapcart.variables, {
+          set: function (target, property, value) {
+            // When any property in window.Tapcart.variables is changed, this function will be called
+            // Update the #variablesPre element with the updated variables
+            console.log("Variables updated:", window.Tapcart.variables);
+            document.getElementById("variablesPre").textContent =
+              JSON.stringify(window.Tapcart.variables, null, 2);
 
-          // Return true to indicate that the assignment was successful
-          return true;
-        },
-      });
+            // Return true to indicate that the assignment was successful
+            return true;
+          },
+        });
 
-      // Replace window.Tapcart.variables with the Proxy object
-      window.Tapcart.variables = proxyVariables;
-    } else {
-      console.error("Tapcart SDK not loaded.");
-    }
+        // Replace window.Tapcart.variables with the Proxy object
+        window.Tapcart.variables = proxyVariables;
+
+        window.Tapcart.registerEventHandler("cart/updated", function (eventData) {
+          window.Tapcart.actions.showToast({
+            type: "success",
+            message: "Event occurred: \"cart/updated\""
+          })
+          console.log("Event happend: ", eventData)
+        })
+
+
+      } else {
+        console.error("Tapcart SDK not loaded.");
+      }
     });
 
     document.addEventListener("DOMContentLoaded", function () {
