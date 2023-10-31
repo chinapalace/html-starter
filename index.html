@@ -238,7 +238,7 @@
     function removeFromCart() {
       const quantity = Number(document.getElementById("quantity").value);
       const cartVariantId = document.getElementById("cartVariantId").value;
-      const sellingPlanId = document.getElementById("sellingPlanId").value;
+      const sellingPlanId = document.getElementById("sellingPlanId").value || null;
 
       if (quantity && cartVariantId) {
         const lineItems = [{ variantId: cartVariantId, quantity, sellingPlanId }]
