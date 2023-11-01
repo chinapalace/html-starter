@@ -237,7 +237,7 @@
           lineItems: [{ variantId: cartVariantId, quantity, sellingPlanId }],
         };
         if (withCartAttributes) {
-          val.cartAttributes = [{ key: "test", value: "test" }]
+          val.lineItems[0].attributes = [{ key: "test", value: "test" }]
         }
         window.Tapcart.actions.addToCart(val);
       }
@@ -251,13 +251,12 @@
       const sellingPlanId = document.getElementById("sellingPlanId").value || null;
       const withCartAttributes = document.getElementById("cartAttributes").checked;
 
-      console.log(withCartAttributes)
       if (quantity && cartVariantId) {
         const val = {
           lineItems: [{ variantId: cartVariantId, quantity, sellingPlanId }],
         }
         if (withCartAttributes) {
-          val.cartAttributes = [{ key: "test", value: "test" }]
+          val.lineItems[0].attributes = [{ key: "test", value: "test" }]
         }
 
           window.Tapcart.actions.removeFromCart(val);
