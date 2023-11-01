@@ -332,7 +332,7 @@
           window.Tapcart.registerEventHandler("cart/updated", function (eventData) {
             window.Tapcart.actions.showToast({
               type: "success",
-              message: "Event occurred: \"cart/updated\""
+              message: "Cart Updated:" + eventData
             })
             console.log("Event happend: ", eventData)
           })
