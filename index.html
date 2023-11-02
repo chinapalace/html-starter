@@ -332,8 +332,11 @@
           window.Tapcart.registerEventHandler("cart/updated", function (eventData) {
             window.Tapcart.actions.showToast({
               type: "success",
-              message: "Cart Updated:" + eventData
+              message: "Cart Updated:" + JSON.stringify(eventData)
             })
+                 document.getElementById("variablesPre").textContent =
+                JSON.stringify(window.Tapcart.variables, null, 2);
+
             console.log("Event happend: ", JSON.stringify(eventData))
           })
 
