@@ -40,6 +40,19 @@ Tapcart.mobile.load({
         },
       ],
     },
+    cart: {
+      items: [
+        {
+          productId: "8109714538808",
+          quantity: 1,
+          attributes: {},
+          variantId: "44445138682168",
+        },
+      ],
+      subtotal: 64,
+      currency: "USD",
+      discounts: [],
+    },
   },
 });
 
