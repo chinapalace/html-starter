@@ -1,0 +1,39 @@
+Arguments: 
+  /Users/justinmclaren/.nvm/versions/node/v18.16.1/bin/node /opt/homebrew/Cellar/yarn/1.22.19/libexec/bin/yarn.js global dir --json
+
+PATH: 
+  /Users/justinmclaren/.nvm/versions/node/v18.16.1/bin:/Users/justinmclaren/google-cloud-sdk/bin:/Users/justinmclaren/.local/share/solana/install/active_release/bin:/Users/justinmclaren/.rbenv/shims:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.16.1
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: Failed to replace env in config: ${TAPCART_GH_INSTALL_PACKAGES}
+      at /opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:94933:13
+      at String.replace (<anonymous>)
+      at envReplace (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:94928:16)
+      at Function.normalizeConfig (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:31938:69)
+      at NpmRegistry.<anonymous> (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:31968:34)
+      at Generator.next (<anonymous>)
+      at step (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:310:30)
+      at /opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "private": true,
+    "dependencies": {
+      "@vercel/edge": "^0.1.2"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
