@@ -53,6 +53,11 @@ Tapcart.mobile.load({
       currency: "USD",
       discounts: [],
     },
+    integrations: {
+      googleAnalytics: {
+        trackingId: "UA-123456789-1",
+      },
+    },
   },
 });
 
