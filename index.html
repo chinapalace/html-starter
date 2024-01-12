@@ -13,35 +13,6 @@
         "Tapcart SDK Initialized ✅";
     });
 
-    function getCookieValue(cookieName) {
-	const name = `${cookieName}=`
-	const decodedCookie = decodeURIComponent(document.cookie)
-	const ca = decodedCookie.split(';')
-	for (let c of ca) {
-		while (c.charAt(0) === ' ') {
-			c = c.slice(1)
-		}
-		if (c.indexOf(name) === 0) {
-			return c.slice(name.length)
-		}
-	}
-	return ''
-}
-
-function updateCookie(name) {
-	const value = getCookieValue(name)
-
-	// Only update the cookie if it already exists (value is not empty)
-	if (value !== '') {
-		const expiryDate = new Date()
-		expiryDate.setMonth(expiryDate.getMonth() + 1) // Set expiry date to 1 month from now
-		const expires = `expires=${expiryDate.toUTCString()}`
-
-		document.cookie = `${name}=${value};${expires};path=/`
-	}
-}
-
-updateCookie('_secure_session_id')
   </script>
   <!-- <script src="https://storage.googleapis.com/cdn.tapcart.com/webbridge-sdk/webbridge.umd.js" defer></script> -->
   <script src="https://storage.googleapis.com/cdn.tapcart.com/webbridge-sdk/webbridge-test.umd.js" defer></script>
